@@ -1,0 +1,16 @@
+/* BACK BUTTON COLOR */
+.back-bar {
+  background: #8ccc8a;
+}
+
+.back-btn {
+  color: #ffffff;
+}
+
+.back-btn:hover {
+  color: #ffffff;
+  opacity: 0.85;
+}
+.back-bar {
+  background: linear-gradient(135deg, #8ccc8a, #6fbf75);
+}
