@@ -1,207 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <title>Menu – Bơ Milk Tea</title>
+    <meta name="description" content="Menu Bơ Milk Tea – Trà sữa, trà trái cây, topping và đồ ăn vặt giá rẻ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Bơ Milk Tea</title>
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background: #f8fdf8;
-        }
-        .menu-box {
-            background: white;
-            border: 2px solid #8ccc8a;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        .menu-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2b8f47;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            border-bottom: 2px solid #8ccc8a;
-        }
-        .item-name {
-            font-weight: 600;
-        }
-        .qty-input {
-            width: 70px;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
 
-<div class="container py-4">
-    <h1 class="text-center mb-4 text-success fw-bold">Bơ Milk Tea Menu</h1>
+    <div class="container py-4">
+        <h1 class="text-center mb-4 text-success fw-bold">🍹 Bơ Milk Tea Menu</h1>
 
-    <!-- ================================
-         TRÀ SỮA
-    ================================= -->
-    <div class="menu-box">
-        <div class="menu-title">Trà Sữa</div>
-
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                    <th>Món</th>
-                    <th>Giá</th>
-                    <th>Số lượng/ngày</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="item-name">TS Truyền Thống</td>
-                    <td>18K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">TS Trân Châu Đường Đen</td>
-                    <td>20K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">TS Trân Châu Đường Đen Kem Trứng</td>
-                    <td>25K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">TS Socola</td>
-                    <td>20K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled  ></td>
-                </tr>
-                <tr>
-                    <td class="item-name">TS Bạc Hà</td>
-                    <td>20K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="menuContainer"></div>
     </div>
 
-    <!-- ================================
-        TRÀ
-    ================================= -->
-    <div class="menu-box">
-        <div class="menu-title">Trà</div>
-
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <td class="item-name">Trà Chanh</td>
-                    <td>8K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Trà Quất</td>
-                    <td>8K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Trà Đào</td>
-                    <td>15K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Trà Quất Lắc Sữa</td>
-                    <td>20K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled  ></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="text-center my-4">
+        <a href="order.html" class="btn btn-success btn-lg fw-bold px-4 py-2">
+            ĐẶT HÀNG NGAY!!!
+        </a>
     </div>
 
-    <!-- ================================
-         ĐÁ XAY
-    ================================= -->
-    <div class="menu-box">
-        <div class="menu-title">Đá Xay</div>
+    <script src="js/data.js"></script>
 
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <td class="item-name">Matcha Đá Xay</td>
-                    <td>25K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Socola Đá Xay</td>
-                    <td>25K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Việt Quất Đá Xay</td>
-                    <td>25K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <script>
+    const container = document.getElementById("menuContainer");
 
-    <!-- ================================
-         TOPPING
-    ================================= -->
-    <div class="menu-box">
-        <div class="menu-title">Topping</div>
+    menuData.forEach(group => {
 
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <td class="item-name">Trân Châu Đen</td>
-                    <td>5K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Pudding</td>
-                    <td>5K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Thạch</td>
-                    <td>5K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        let qtyLabel = "";
+        if (group.category === "Trà Sữa" || group.category === "Trà") qtyLabel = "150";
+        else if (group.category === "Đá Xay") qtyLabel = "77";
 
-    <!-- ================================
-         ĐỒ ĂN VẶT
-    ================================= -->
-    <div class="menu-box">
-        <div class="menu-title">Đồ Ăn Vặt</div>
+        let html = `
+            <div class="menu-box">
+                <div class="menu-title">${group.category}</div>
 
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <td class="item-name">Xúc Xích</td>
-                    <td>10K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Khoai Tây Lắc Phô Mai</td>
-                    <td>25K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-                <tr>
-                    <td class="item-name">Hotdog</td>
-                    <td>15K</td>
-                    <td><input type="number" class="form-control qty-input" value="0" disabled></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:50%">Món</th>
+                            <th style="width:20%; text-align:center">Giá</th>
+                            <th style="width:30%; text-align:center">Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
 
-</div>
+        group.items.forEach(item => {
+            html += `
+                <tr>
+                    <td class="item-name">${item.name}</td>
+                    <td class="price-cell">${Math.round(item.price / 1000)}K</td>
+                    <td class="qty-cell">
+                        ${
+                            qtyLabel
+                            ? `<input class="qty-input" value="${qtyLabel}" disabled>`
+                            : `<span class="no-qty">Không áp dụng</span>`
+                        }
+                    </td>
+                </tr>
+            `;
+        });
 
-<div class="text-center my-4">
-    <a href="order.html" class="btn btn-success btn-lg fw-bold px-4 py-2">
-        ĐẶT HÀNG NGAY!!!
-    </a>
-</div>
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        container.innerHTML += html;
+    });
+    </script>
 
 </body>
 </html>

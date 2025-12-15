@@ -1,0 +1,103 @@
+/* ==========================
+GLOBAL
+========================== */
+body {
+    background: #f8fdf8;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 30px;
+    color: #333;
+}
+
+/* ==========================
+MENU BOX
+========================== */
+.menu-box {
+    background: white;
+    border: 2px solid #8ccc8a;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* ==========================
+TITLE
+========================== */
+.menu-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2b8f47;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #8ccc8a;
+    padding-bottom: 6px;
+}
+
+/* ==========================
+TABLE STRUCTURE (VERY IMPORTANT)
+========================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* HEADER */
+thead th {
+    background: #8ccc8a;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* BODY CELLS */
+tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #e8f7e8;
+    vertical-align: middle;
+}
+
+/* ROW HOVER */
+tbody tr:hover td {
+    background: #f1fbf1;
+}
+
+/* ==========================
+COLUMN ALIGNMENT
+========================== */
+.item-name {
+    font-weight: 600;
+    color: #2b8f47;
+    text-align: left;
+}
+
+.price-cell {
+    text-align: center;
+    font-weight: 600;
+}
+
+.qty-cell {
+    text-align: center;
+}
+
+/* ==========================
+QUANTITY DISPLAY
+========================== */
+.qty-input {
+    width: 70px;
+    height: 28px;
+    border-radius: 20px;
+    border: 1.5px solid #8ccc8a;
+    background: #f1fbf1;
+    text-align: center;
+    font-weight: 700;
+    color: #2b8f47;
+    font-size: 14px;
+}
+
+/* NO QUANTITY */
+.no-qty {
+    font-size: 14px;
+    font-style: italic;
+    color: #999;
+}

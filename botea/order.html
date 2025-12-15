@@ -1,267 +1,100 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Order Trà Sữa – Bơ Tea</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Đặt Hàng – Bơ Milk Tea</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* ==========================
-        GLOBAL
-        ========================== */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f8fdf8; /* your green background */
-            padding: 30px;
-            color: #333;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2b8f47; /* green theme */
-            text-shadow: 1px 1px 2px #aee5b2;
-            margin-bottom: 25px;
-            font-size: 32px;
-        }
-
-        /* ==========================
-        TABLE
-        ========================== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid #8ccc8a; /* your green border */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        th {
-            background: #8ccc8a;
-            color: white;
-            padding: 14px;
-            font-size: 18px;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #e8f7e8;
-        }
-
-        tr:hover td {
-            background: #f1fbf1;
-        }
-
-        /* ==========================
-        CATEGORY HEADER
-        ========================== */
-        .category-row {
-            background: #e3f8e3; /* soft green */
-            font-weight: bold;
-            font-size: 18px;
-            padding: 10px;
-            color: #2b8f47;
-            text-transform: uppercase;
-            border-left: 6px solid #8ccc8a;
-        }
-
-        /* ==========================
-        QUANTITY INPUTS
-        ========================== */
-        .qty-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .qty-btn {
-            background: #8ccc8a;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .qty-btn:hover {
-            background: #6fb86d;
-        }
-
-        .order-input {
-            width: 70px; /* your style applied */
-            text-align: center;
-            padding: 5px;
-            border: 1px solid #8ccc8a;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-
-        .item-name {
-            font-weight: 600; /* your style */
-        }
-
-        /* ==========================
-        SUMMARY BOX
-        ========================== */
-        .summary-box {
-            background: white;
-            width: 340px;
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #8ccc8a;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-            float: right;
-            margin-top: 30px;
-        }
-
-        .summary-box h3 {
-            color: #2b8f47;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-
-        .total-line {
-            display: flex;
-            justify-content: space-between;
-            margin: 8px 0;
-            font-size: 17px;
-        }
-
-        .highlight {
-            font-weight: bold;
-            color: #2b8f47;
-            font-size: 19px;
-        }
-
-        /* ==========================
-        BUTTON ORDER
-        ========================== */
-        .order-btn {
-            background: linear-gradient(45deg, #2b8f47, #59c66f);
-            color: white;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 50px;
-            margin-top: 20px;
-            font-size: 20px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(43,143,71,0.3);
-        }
-
-        .order-btn:hover {
-            transform: scale(1.05);
-            transition: 0.2s;
-            box-shadow: 0 6px 18px rgba(43,143,71,0.4);
-        }
-
-        /* ==========================
-        MENU BOX (your style integrated)
-        ========================== */
-        .menu-box {
-            background: white;
-            border: 2px solid #8ccc8a;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .menu-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2b8f47;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            border-bottom: 2px solid #8ccc8a;
-        }
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</head>
-
-<body>
+        <link rel="stylesheet" href="css/order.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
+    <body>
 
     <h1>🍹 Đặt Trà Sữa Ngay!</h1>
 
-    <div style="text-align:center; margin-bottom:20px;">
-        <input 
-            id="searchInput" 
-            type="text" 
-            placeholder="🔍 Tìm món theo tên..." 
-            style="padding:10px; width:50%; border:2px solid #8ccc8a; border-radius:8px;">
+    <div class="search-box">
+        <input id="searchInput" type="text" placeholder="🔍 Tìm món theo tên...">
     </div>
-
 
     <table>
         <thead>
             <tr>
-                <th>Món
-                    <span id="sortNameUp" style="cursor:pointer;">▲</span>
-                    <span id="sortNameDown" style="cursor:pointer;">▼</span>
+                <th>
+                    Món
+                    <span class="sort-btn" onclick="sortNameAsc()">▲</span>
+                    <span class="sort-btn" onclick="sortNameDesc()">▼</span>
                 </th>
-                <th>Giá
-                    <span id="sortPriceUp" style="cursor:pointer;">▲</span>
-                    <span id="sortPriceDown" style="cursor:pointer;">▼</span>
+                <th>
+                    Giá
+                    <span class="sort-btn" onclick="sortPriceAsc()">▲</span>
+                    <span class="sort-btn" onclick="sortPriceDesc()">▼</span>
                 </th>
                 <th>Số lượng</th>
                 <th>Tổng</th>
             </tr>
         </thead>
-
-        <tbody id="menuBody">
-
-            <!-- Dữ liệu menu sẽ được JS render tự động -->
-
-        </tbody>
+        <tbody id="menuBody"></tbody>
     </table>
 
     <div class="summary-box">
         <h3>Hóa Đơn</h3>
-        <div class="total-line"><span>Tổng tiền:</span> <span id="grandTotal">0K</span></div>
-        <div class="total-line"><span>Giảm giá:</span> <span id="discount">0K</span></div>
-        <div class="total-line"><span>Phí giao hàng:</span> <span id="delivery">0K</span></div>
+        <div class="total-line"><span>Tổng:</span><span id="grandTotal">0K</span></div>
+        <div class="total-line"><span>Giảm:</span><span id="discount">0K</span></div>
+        <div class="total-line"><span>Ship:</span><span id="delivery">0K</span></div>
         <hr>
-        <div class="total-line highlight"><span>Thanh toán:</span> <span id="finalPrice">0K</span></div>
+        <div class="total-line highlight">
+            <span>Thanh toán:</span><span id="finalPrice">0K</span>
+        </div>
 
-        <button class="order-btn" onclick="showOrderSuccess()" >Đặt hàng ngay!!!</button>
+        <button class="order-btn" onclick="showOrderSuccess()">Đặt hàng ngay!!!</button>
     </div>
 
-    <script src="data.js"></script>
-    <script src="algo.js"></script>
+    <!-- DATA + ALGO -->
+    <script src="js/data.js"></script>
+    <script src="js/algo.js"></script>
 
     <script>
+        /* ======================
+        INIT DSA STRUCTURES
+        ====================== */
         const undoStack = new Stack();
         const redoStack = new Stack();
         const cart = new CartLinkedList();
-    </script>
 
-    <script>
-    let menuDataFlat = [];
-
-    menuData.forEach(group => {
-        group.items.forEach(item => {
-            menuDataFlat.push({
-                name: item.name,
-                price: item.price,
-                category: group.category
+        /* ======================
+        FLATTEN MENU DATA
+        ====================== */
+        let flatMenu = [];
+        menuData.forEach(group => {
+            group.items.forEach(item => {
+                flatMenu.push({
+                    name: item.name,
+                    price: item.price,
+                    category: group.category
+                });
             });
         });
-    });
 
-        // Render menu
+        /* ======================
+        RENDER MENU
+        ====================== */
         const tbody = document.getElementById("menuBody");
 
-        menuData.forEach(group => {
-            tbody.innerHTML += `<tr><td colspan="4" class="category-row">${group.category}</td></tr>`;
+        function renderMenu(data) {
+            tbody.innerHTML = "";
+            let lastCategory = "";
 
-            group.items.forEach(item => {
+            data.forEach(item => {
+                if (item.category !== lastCategory) {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td colspan="4" class="category-row">${item.category}</td>
+                        </tr>`;
+                    lastCategory = item.category;
+                }
+
                 tbody.innerHTML += `
-                    <tr data-price="${item.price}" data-name="${item.name}" data-category="${group.category}">
+                    <tr data-name="${item.name}" data-price="${item.price}">
                         <td>${item.name}</td>
                         <td>${Math.round(item.price / 1000)}K</td>
                         <td>
@@ -272,198 +105,114 @@
                             </div>
                         </td>
                         <td class="total-cell">0K</td>
-                    </tr>
-                `;
+                    </tr>`;
             });
-        });
-
-
-    // ==== SORT TRONG TỪNG CATEGORY ====
-
-    function getItemsInCategory(cat) {
-        return [...document.querySelectorAll(`tr[data-category="${cat}"]`)];
-    }
-
-
-    function sortOneGroup(category, sortedItems) {
-    const rows = [...document.querySelectorAll(`tr[data-category="${category}"]`)];
-    const rowMap = {};
-    rows.forEach(r => rowMap[r.dataset.name] = r);
-
-    // tìm header
-    const header = [...document.querySelectorAll(".category-row")]
-        .find(h => h.textContent.trim() === category);
-
-    // lấy đúng vị trí đứng sau header
-    let insertPos = header.nextElementSibling;
-
-    // BƯỚC 1: đưa tất cả items về ngay sau header (reset vị trí)
-    rows.forEach(r => {
-        tbody.insertBefore(r, insertPos);
-        insertPos = r.nextElementSibling;
-    });
-
-    // BƯỚC 2: chèn lại theo thứ tự đã sort
-    insertPos = header.nextElementSibling;
-    sortedItems.forEach(item => {
-        const row = rowMap[item.name];
-        if (row) {
-            tbody.insertBefore(row, insertPos);
-            insertPos = row.nextElementSibling;
-        }
-    });
-}
-
-    function sortAllGroups(sortedList) {
-        const grouped = {};
-        sortedList.forEach(i => {
-        if (!grouped[i.category]) grouped[i.category] = [];
-            grouped[i.category].push(i);
-        });
-        Object.keys(grouped).forEach(cat => sortOneGroup(cat, grouped[cat]));
-    }
-
-
-    sortNameUp.onclick = () => sortAllGroups(quickSortByName([...menuDataFlat], "asc"));
-    sortNameDown.onclick = () => sortAllGroups(quickSortByName([...menuDataFlat], "desc"));
-    sortPriceUp.onclick = () => sortAllGroups(bubbleSort([...menuDataFlat], "asc"));
-    sortPriceDown.onclick = () => sortAllGroups(bubbleSort([...menuDataFlat], "desc"));
-
-    // ===== SEARCH KMP =====
-    searchInput.addEventListener("input", function () {
-        const keyword = this.value.trim().toLowerCase();
-        const rows = document.querySelectorAll("tr[data-name]");
-
-        if (keyword === "") {
-            rows.forEach(r => r.style.display = "");
-            return;
         }
 
-        const results = KMPSearch(menuDataFlat, keyword);
-        const names = results.map(i => i.name);
+        renderMenu(flatMenu);
 
-        rows.forEach(row => {
-            row.style.display = names.includes(row.dataset.name) ? "" : "none";
-        });
-    });
+        /* ======================
+        FORMAT
+        ====================== */
+        function formatK(v) {
+            return Math.round(v / 1000) + "K";
+        }
 
-        //==== thêm hàm Stack ====
+        /* ======================
+        SAVE STATE – STACK
+        ====================== */
         function saveState() {
-            const state = [...document.querySelectorAll(".order-input")]
-            .map(i => i.value);
+            const state = [...document.querySelectorAll(".order-input")].map(i => i.value);
             undoStack.push(state);
             redoStack.clear();
         }
 
-
-
-
-        function formatK(v) { return Math.round(v / 1000) + "K"; }
-
-        function updateTotals() {
-
-            document.querySelectorAll("#menuBody tr[data-price]").forEach(row => {
-                const price = parseInt(row.dataset.price);
-                const qty = parseInt(row.querySelector(".order-input").value) || 0;
-                const total = price * qty;
-
-                row.querySelector(".total-cell").textContent = formatK(price * qty);
-            });
-
-            const grandTotal = cart.getTotal(); // ✅ LINKED LIST
-
-            document.getElementById("grandTotal").textContent = formatK(grandTotal);
-            document.getElementById("discount").textContent = grandTotal >= 100000 ? "10K" : "0K";
-            document.getElementById("delivery").textContent = grandTotal > 0 ? "5K" : "0K";
-            document.getElementById("finalPrice").textContent = formatK(grandTotal - (grandTotal >= 100000 ? 10000 : 0) + (grandTotal > 0 ? 5000 : 0));
-        }
-
-        // quantity +/- buttons
+        /* ======================
+        CHANGE QTY
+        ====================== */
         function changeQty(btn, delta) {
-            saveState(); // ✅ STACK
+            saveState();
 
             const row = btn.closest("tr");
             const input = row.querySelector(".order-input");
 
-            let val = parseInt(input.value) || 0;
-                val = Math.max(0, val + delta);
-                input.value = val;
+            let val = Math.max(0, (+input.value || 0) + delta);
+            input.value = val;
 
             const name = row.dataset.name;
-            const price = parseInt(row.dataset.price);
+            const price = +row.dataset.price;
 
             if (val > 0) {
-            cart.addOrUpdate({ name, price, qty: val }); // ✅ LINKED LIST
+                cart.addOrUpdate({ name, price, qty: val });
             } else {
-            cart.remove(name); // ✅ LINKED LIST
+                cart.remove(name);
             }
+
+            row.querySelector(".total-cell").textContent = formatK(val * price);
             updateTotals();
         }
 
-        // func Rebuild cart (để Stack + Linked List đồng bộ)
-        function rebuildCartFromUI() {
-            cart.head = null;
+        /* ======================
+        UPDATE TOTALS – LINKED LIST
+        ====================== */
+        function updateTotals() {
+            const total = cart.getTotal();
 
-        document.querySelectorAll("#menuBody tr[data-price]").forEach(row => {
-        const qty = parseInt(row.querySelector(".order-input").value);
-        if (qty > 0) {
-        cart.addOrUpdate({
-        name: row.dataset.name,
-        price: parseInt(row.dataset.price),
-        qty
+            grandTotal.textContent = formatK(total);
+            discount.textContent = total >= 100000 ? "10K" : "0K";
+            delivery.textContent = total > 0 ? "5K" : "0K";
+            finalPrice.textContent = formatK(
+                total - (total >= 100000 ? 10000 : 0) + (total > 0 ? 5000 : 0)
+            );
+        }
+
+        /* ======================
+        SEARCH – KMP
+        ====================== */
+        const searchInput = document.getElementById("searchInput");
+
+        searchInput.addEventListener("input", function () {
+            const keyword = this.value.trim().toLowerCase();
+            if (!keyword) return renderMenu(flatMenu);
+
+            const results = KMPSearch(flatMenu, keyword);
+            renderMenu(results);
         });
+
+        /* ======================
+        SORT CONTROLS
+        ====================== */
+        function sortNameAsc() {
+            renderMenu(quickSortByName(flatMenu, true));
         }
-         });
+        function sortNameDesc() {
+            renderMenu(quickSortByName(flatMenu, false));
         }
-
-        //in undo
-        function undo() {
-            if (undoStack.isEmpty()) return;
-
-            const current = [...document.querySelectorAll(".order-input")]
-                                        .map(i => i.value);
-
-            redoStack.push(current);
-            const prev = undoStack.pop();
-            document.querySelectorAll(".order-input")
-            .forEach((input, i) => input.value = prev[i]);
-
-            rebuildCartFromUI();
-            updateTotals();
+        function sortPriceAsc() {
+            renderMenu(bubbleSortByPrice(flatMenu, true));
+        }
+        function sortPriceDesc() {
+            renderMenu(bubbleSortByPrice(flatMenu, false));
         }
 
-
-
-
-        document.querySelectorAll(".order-input").forEach(input =>
-            input.addEventListener("input", updateTotals)
-        );
-
+        /* ======================
+        ORDER SUCCESS
+        ====================== */
         function showOrderSuccess() {
-            const total = document.getElementById("finalPrice").textContent;
-
             Swal.fire({
                 title: "🎉 Đặt hàng thành công!",
                 html: `
-                    <b>Tổng đơn của bạn:</b> <span style="color:#2b8f47;font-size:20px;">${total}</span><br><br>
+                    <b>Tổng thanh toán:</b>
+                    <span style="color:#2b8f47;font-size:20px">
+                        ${finalPrice.textContent}
+                    </span><br><br>
                     Cảm ơn bạn đã ủng hộ ❤️
                 `,
                 icon: "success",
-                confirmButtonText: "Quay lại trang chủ",
-                confirmButtonColor: "#28a745",
-                background: "#ffffffd9",
-                color: "#2b2b2b",
-                backdrop: `
-                    rgba(0, 0, 0, 0.4)
-                    url("https://i.gifer.com/7efs.gif")
-                    center top
-                    no-repeat
-                `
-            }).then(() => {
-                window.location.href = "index.html"; // Return to home page
-            });
+                confirmButtonColor: "#2b8f47"
+            }).then(() => location.href = "index.html");
         }
     </script>
 
-</body>
+    </body>
 </html>
