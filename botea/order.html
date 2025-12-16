@@ -189,15 +189,27 @@
         function undo() {
             if (undoStack.isEmpty()) return;
 
-            const current = [...document.querySelectorAll(".order-input")]
-                                        .map(i => i.value);
-
+            // Save current state for redo
+            const current = [...document.querySelectorAll(".order-input")].map(i => i.value);
             redoStack.push(current);
-            const prev = undoStack.pop();
-            document.querySelectorAll(".order-input")
-            .forEach((input, i) => input.value = prev[i]);
 
+            // Pop previous state
+            const prev = undoStack.pop();
+
+            // Restore input values
+            document.querySelectorAll(".order-input").forEach((input, i) => input.value = prev[i]);
+
+            // Rebuild cart linked list
             rebuildCartFromUI();
+
+            // Update per-row totals
+            document.querySelectorAll("#menuBody tr[data-price]").forEach(row => {
+                const qty = parseInt(row.querySelector(".order-input").value);
+                const price = parseInt(row.dataset.price);
+                row.querySelector(".total-cell").textContent = formatK(qty * price);
+            });
+
+            // Update bottom totals
             updateTotals();
         }
 
