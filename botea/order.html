@@ -14,7 +14,11 @@
 
     <div class="search-box">
         <input id="searchInput" type="text" placeholder="🔍 Tìm món theo tên...">
+
+        <button class="undo-btn" onclick="undo()">Undo</button>
     </div>
+
+    
 
     <table>
         <thead>
@@ -166,6 +170,37 @@
             );
         }
 
+        function rebuildCartFromUI() {
+            cart.head = null;
+
+            document.querySelectorAll("#menuBody tr[data-price]").forEach(row => {
+                const qty = parseInt(row.querySelector(".order-input").value);
+                if (qty > 0) {
+                    cart.addOrUpdate({
+                        name: row.dataset.name,
+                        price: parseInt(row.dataset.price),
+                        qty
+                    });
+                }
+            });
+        }
+
+        //in undo
+        function undo() {
+            if (undoStack.isEmpty()) return;
+
+            const current = [...document.querySelectorAll(".order-input")]
+                                        .map(i => i.value);
+
+            redoStack.push(current);
+            const prev = undoStack.pop();
+            document.querySelectorAll(".order-input")
+            .forEach((input, i) => input.value = prev[i]);
+
+            rebuildCartFromUI();
+            updateTotals();
+        }
+
         /* ======================
         SEARCH – KMP
         ====================== */
@@ -175,9 +210,11 @@
             const keyword = this.value.trim().toLowerCase();
             if (!keyword) return renderMenu(flatMenu);
 
-            const results = KMPSearch(flatMenu, keyword);
+            // Use the true KMP search
+            const results = KMPSearchCart(flatMenu, keyword);
             renderMenu(results);
         });
+
 
         /* ======================
         SORT CONTROLS

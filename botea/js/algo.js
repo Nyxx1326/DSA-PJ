@@ -161,10 +161,58 @@ function bubbleSortByPrice(arr, asc = true) {
 /* =====================================================
   KMP SEARCH – SEARCH BY NAME (DSA)
 ===================================================== */
-function KMPSearch(data, keyword) {
+// 1. Build LPS array
+function buildLPS(pattern) {
+  const lps = Array(pattern.length).fill(0);
+  let len = 0;
+  let i = 1;
+
+  while (i < pattern.length) {
+    if (pattern[i] === pattern[len]) {
+      len++;
+      lps[i] = len;
+      i++;
+    } else {
+      if (len !== 0) {
+        len = lps[len - 1];
+      } else {
+        lps[i] = 0;
+        i++;
+      }
+    }
+  }
+
+  return lps;
+}
+
+// 2. KMP search for single string
+function kmpMatch(text, pattern) {
+  const lps = buildLPS(pattern);
+  let i = 0, j = 0;
+
+  while (i < text.length) {
+    if (text[i] === pattern[j]) {
+      i++;
+      j++;
+    }
+
+    if (j === pattern.length) {
+      return true; // found
+    } else if (i < text.length && text[i] !== pattern[j]) {
+      if (j !== 0) j = lps[j - 1];
+      else i++;
+    }
+  }
+
+  return false; // not found
+}
+
+// 3. KMP search for cart data
+function KMPSearchCart(data, keyword) {
   keyword = keyword.toLowerCase();
 
   return data.filter(item =>
-    item.name.toLowerCase().includes(keyword)
+    kmpMatch(item.name.toLowerCase(), keyword)
   );
 }
+
