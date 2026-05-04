@@ -17,19 +17,6 @@ Botea is a responsive website that simulates an online ordering system for drink
 - 🎨 Responsive and user-friendly design
 - 📱 Mobile-friendly layout
 
-## 📁 Project Structure
-
-botea/
-│── index.html # Homepage
-│── menu.html # Menu page
-│── order.html # Order interface
-│── news*.html # News pages
-│
-├── css/ # Stylesheets
-├── js/ # JavaScript files
-├── img/ # Images and assets
-├── fonts/ # Icons and fonts
-
 
 ## 🎯 Key Highlights
 - Built a complete multi-page website using modern frontend technologies
